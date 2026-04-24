@@ -8,10 +8,12 @@ SOURCES += \
         grupo.cpp \
         jugador.cpp \
         main.cpp \
-        partido.cpp
+        partido.cpp \
+        torneo.cpp
 
 HEADERS += \
     equipo.h \
     grupo.h \
     jugador.h \
-    partido.h
+    partido.h \
+    torneo.h
