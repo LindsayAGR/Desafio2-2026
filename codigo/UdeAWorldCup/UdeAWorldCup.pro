@@ -5,11 +5,13 @@ CONFIG -= qt
 
 SOURCES += \
         equipo.cpp \
+        grupo.cpp \
         jugador.cpp \
         main.cpp \
         partido.cpp
 
 HEADERS += \
     equipo.h \
+    grupo.h \
     jugador.h \
     partido.h
