@@ -6,8 +6,10 @@ CONFIG -= qt
 SOURCES += \
         equipo.cpp \
         jugador.cpp \
-        main.cpp
+        main.cpp \
+        partido.cpp
 
 HEADERS += \
     equipo.h \
-    jugador.h
+    jugador.h \
+    partido.h
