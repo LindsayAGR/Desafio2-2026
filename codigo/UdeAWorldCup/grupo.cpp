@@ -67,26 +67,26 @@ void Grupo::simularPartidos() {
 
 void Grupo::mostrarTabla() {
 
-    // ordenar por puntos y diferencia de gol
+
+    // ordenar por puntos, diferencia de gol y goles a favor
     for (int i = 0; i < cantidadEquipos - 1; i++) {
         for (int j = i + 1; j < cantidadEquipos; j++) {
 
+            int dg_i = equipos[i]->getGF() - equipos[i]->getGC();
+            int dg_j = equipos[j]->getGF() - equipos[j]->getGC();
+
             if (
                 equipos[j]->getPuntos() > equipos[i]->getPuntos() ||
-                (
-                    equipos[j]->getPuntos() == equipos[i]->getPuntos() &&
-                    (equipos[j]->getGF() - equipos[j]->getGC()) >
-                        (equipos[i]->getGF() - equipos[i]->getGC())
-                    )
+                (equipos[j]->getPuntos() == equipos[i]->getPuntos() && dg_j > dg_i) ||
+                (equipos[j]->getPuntos() == equipos[i]->getPuntos() && dg_j == dg_i &&
+                 equipos[j]->getGF() > equipos[i]->getGF())
                 ) {
                 Equipo* temp = equipos[i];
                 equipos[i] = equipos[j];
                 equipos[j] = temp;
             }
-
         }
     }
-
     cout << "\nTabla de posiciones:\n";
     cout << "Equipo\tPJ\tPG\tPE\tPP\tGF\tGC\tPTS\n";
 
