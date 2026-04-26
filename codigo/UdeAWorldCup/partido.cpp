@@ -21,10 +21,15 @@ Partido::Partido(Equipo* eq1, Equipo* eq2, string fecha, string sede) {
 
     golesEquipo1 = 0;
     golesEquipo2 = 0;
+
+    amarillas1 = amarillas2 = 0;
+    rojas1 = rojas2 = 0;
 }
 
-// Simulación simple
+// Simulación del partido
 void Partido::simularPartido() {
+
+    // goles aleatorios
     golesEquipo1 = rand() % 5;
     golesEquipo2 = rand() % 5;
 
@@ -40,9 +45,41 @@ void Partido::simularPartido() {
         j2[rand() % 26].registrarGol();
     }
 
+    // minutos jugados
+    for (int i = 0; i < 26; i++) {
+        j1[i].sumarMinutos(90);
+        j2[i].sumarMinutos(90);
+    }
 
-    // ACTUALIZAR ESTADÍSTICAS
+    // faltas
+    for (int i = 0; i < 5; i++) {
+        j1[rand() % 26].cometerFalta();
+        j2[rand() % 26].cometerFalta();
+    }
 
+    // tarjetas amarillas
+    for (int i = 0; i < 3; i++) {
+        if (rand() % 100 < 50) {
+            j1[rand() % 26].recibirAmarilla();
+            amarillas1++;
+        }
+
+        if (rand() % 100 < 50) {
+            j2[rand() % 26].recibirAmarilla();
+            amarillas2++;
+        }
+    }
+    // tarjetas rojas
+    if (rand() % 100 < 10) {
+        j1[rand() % 26].recibirRoja();
+        rojas1++;
+    }
+
+    if (rand() % 100 < 10) {
+        j2[rand() % 26].recibirRoja();
+        rojas2++;
+    }
+    // actualizar estadísticas del equipo
     equipo1->sumarGoles(golesEquipo1, golesEquipo2);
     equipo2->sumarGoles(golesEquipo2, golesEquipo1);
 
@@ -65,7 +102,10 @@ void Partido::mostrarResultado() {
     cout << equipo1->getNombrePais() << " "
          << golesEquipo1 << " - "
          << golesEquipo2 << " "
-         << equipo2->getNombrePais() << endl;
+         << equipo2->getNombrePais()
+         << " | Amarillas: " << amarillas1 << "-" << amarillas2
+         << " | Rojas: " << rojas1 << "-" << rojas2
+         << endl;
 }
 
 //  GETTERS

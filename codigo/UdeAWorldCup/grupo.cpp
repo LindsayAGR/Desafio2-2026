@@ -67,14 +67,23 @@ void Grupo::simularPartidos() {
 
 void Grupo::mostrarTabla() {
 
-    //  ordenar por puntos (mayor a menor)
+    // ordenar por puntos y diferencia de gol
     for (int i = 0; i < cantidadEquipos - 1; i++) {
         for (int j = i + 1; j < cantidadEquipos; j++) {
-            if (equipos[j]->getPuntos() > equipos[i]->getPuntos()) {
+
+            if (
+                equipos[j]->getPuntos() > equipos[i]->getPuntos() ||
+                (
+                    equipos[j]->getPuntos() == equipos[i]->getPuntos() &&
+                    (equipos[j]->getGF() - equipos[j]->getGC()) >
+                        (equipos[i]->getGF() - equipos[i]->getGC())
+                    )
+                ) {
                 Equipo* temp = equipos[i];
                 equipos[i] = equipos[j];
                 equipos[j] = temp;
             }
+
         }
     }
 

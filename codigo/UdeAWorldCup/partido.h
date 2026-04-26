@@ -16,6 +16,9 @@ private:
     string fecha;
     string sede;
 
+    int amarillas1, amarillas2;
+    int rojas1, rojas2;
+
 public:
     Partido();
     Partido(Equipo* eq1, Equipo* eq2, string fecha, string sede);
