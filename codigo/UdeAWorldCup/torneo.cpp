@@ -97,3 +97,94 @@ void Torneo::mostrarTorneo() {
         cout << "------------------\n";
     }
 }
+void Torneo::clasificarEquipos() {
+
+    vector<Equipo*> primeros;
+    vector<Equipo*> segundos;
+    vector<Equipo*> terceros;
+
+    // sacar 123
+    for (int i = 0; i < cantidadGrupos; i++) {
+
+        vector<Equipo*> ordenados = grupos[i].getEquiposOrdenados();
+
+        primeros.push_back(ordenados[0]);
+        segundos.push_back(ordenados[1]);
+        terceros.push_back(ordenados[2]);
+    }
+
+    //ordenar terceros
+    for (int i = 0; i < terceros.size() - 1; i++) {
+        for (int j = i + 1; j < terceros.size(); j++) {
+
+            int pts_i = terceros[i]->getPuntos();
+            int pts_j = terceros[j]->getPuntos();
+
+            int dg_i = terceros[i]->getGF() - terceros[i]->getGC();
+            int dg_j = terceros[j]->getGF() - terceros[j]->getGC();
+
+            if (
+                pts_j > pts_i ||
+                (pts_j == pts_i && dg_j > dg_i) ||
+                (pts_j == pts_i && dg_j == dg_i &&
+                 terceros[j]->getGF() > terceros[i]->getGF())
+                ) {
+                Equipo* temp = terceros[i];
+                terceros[i] = terceros[j];
+                terceros[j] = temp;
+            }
+        }
+    }
+
+    // seleccionar los 8 mejores terceros
+    vector<Equipo*> mejoresTerceros;
+
+    for (int i = 0; i < 8 && i < terceros.size(); i++) {
+        mejoresTerceros.push_back(terceros[i]);
+    }
+
+
+
+    cout << "\n--------- CLASIFICADOS--------\n";
+
+    cout << "\nPrimeros de grupo:\n";
+    for (int i = 0; i < primeros.size(); i++) {
+        cout << primeros[i]->getNombrePais() << endl;
+    }
+
+    cout << "\nSegundos de grupo:\n";
+    for (int i = 0; i < segundos.size(); i++) {
+        cout << segundos[i]->getNombrePais() << endl;
+    }
+
+    cout << "\nMejores terceros:\n";
+    for (int i = 0; i < mejoresTerceros.size(); i++) {
+        cout << mejoresTerceros[i]->getNombrePais()
+        << " (PTS: " << mejoresTerceros[i]->getPuntos() << ")\n";
+    }
+
+    cout << "\n  CRUCES\n";
+
+    // primeros vs mejores terceros
+    cout << "\nPrimeros vs Mejores Terceros:\n";
+
+    for (int i = 0; i < primeros.size() && i < mejoresTerceros.size(); i++) {
+        cout << primeros[i]->getNombrePais()
+        << " vs "
+        << mejoresTerceros[i]->getNombrePais()
+        << endl;
+    }
+
+    // segundos entre sí
+    cout << "\nSegundos entre si:\n";
+
+    for (int i = 0; i < segundos.size(); i += 2) {
+
+        if (i + 1 < segundos.size()) {
+            cout << segundos[i]->getNombrePais()
+            << " vs "
+            << segundos[i + 1]->getNombrePais()
+            << endl;
+        }
+    }
+}

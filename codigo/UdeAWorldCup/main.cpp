@@ -15,11 +15,13 @@ int main() {
     cout << "   SIMULADOR DE MUNDIAL DE FUTBOL   \n";
     cout << "=====================================\n\n";
 
-    // CAMBIA ESTO SEGÚN NECESITES
-    // Pruebas: (8, 2)
-    // Final:   (48, 12)
+    // Pruebas rápidas:
     int cantEquipos = 8;
     int cantGrupos = 2;
+
+    // Para entrega final:
+    // int cantEquipos = 48;
+    // int cantGrupos = 12;
 
     // Crear torneo
     Torneo torneo(cantEquipos, cantGrupos);
@@ -36,10 +38,12 @@ int main() {
     cout << "Simulando partidos...\n\n";
     torneo.simularTorneo();
 
-    cout << "=========== RESULTADOS ===========\n\n";
+    cout << "****** RESULTADOS *******\n\n";
     torneo.mostrarTorneo();
 
-    cout << "=====================================\n";
+    torneo.clasificarEquipos();
+
+    cout << "\n=====================================\n";
     cout << "        FIN DE LA SIMULACION        \n";
     cout << "=====================================\n";
 

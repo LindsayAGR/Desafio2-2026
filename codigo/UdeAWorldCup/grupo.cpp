@@ -55,7 +55,6 @@ void Grupo::generarPartidos() {
     }
 }
 
-// Simular partidos
 void Grupo::simularPartidos() {
     for (int i = 0; i < cantidadPartidos; i++) {
         partidos[i].simularPartido();
@@ -63,7 +62,6 @@ void Grupo::simularPartidos() {
 }
 
 
-//  TABLA DE POSICIONES
 
 void Grupo::mostrarTabla() {
 
@@ -103,7 +101,36 @@ void Grupo::mostrarTabla() {
     }
 }
 
-//  MOSTRAR GRUPO
+vector<Equipo*> Grupo::getEquiposOrdenados() {
+
+    for (int i = 0; i < cantidadEquipos - 1; i++) {
+        for (int j = i + 1; j < cantidadEquipos; j++) {
+
+            int dg_i = equipos[i]->getGF() - equipos[i]->getGC();
+            int dg_j = equipos[j]->getGF() - equipos[j]->getGC();
+
+            if (
+                equipos[j]->getPuntos() > equipos[i]->getPuntos() ||
+                (equipos[j]->getPuntos() == equipos[i]->getPuntos() && dg_j > dg_i) ||
+                (equipos[j]->getPuntos() == equipos[i]->getPuntos() && dg_j == dg_i &&
+                 equipos[j]->getGF() > equipos[i]->getGF())
+                ) {
+                Equipo* temp = equipos[i];
+                equipos[i] = equipos[j];
+                equipos[j] = temp;
+            }
+        }
+    }
+
+    vector<Equipo*> resultado;
+
+    for (int i = 0; i < cantidadEquipos; i++) {
+        resultado.push_back(equipos[i]);
+    }
+
+    return resultado;
+}
+
 
 void Grupo::mostrarGrupo() {
     cout << "Grupo " << nombre << endl;

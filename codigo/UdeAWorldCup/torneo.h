@@ -2,8 +2,10 @@
 #define TORNEO_H
 
 #include "Equipo.h"
+#include <vector>
+using namespace std;
 
-// FORWARD DECLARATION
+
 class Grupo;
 
 class Torneo {
@@ -15,14 +17,19 @@ private:
     int cantidadGrupos;
 
 public:
+
     Torneo(int cantEquipos, int cantGrupos);
     ~Torneo();
 
+    // FASE DE GRUPOS
     void crearEquipos();
     void crearGrupos();
     void asignarEquiposAGrupos();
     void simularTorneo();
     void mostrarTorneo();
+
+
+    void clasificarEquipos();
 };
 
 #endif

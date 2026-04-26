@@ -4,6 +4,7 @@
 #include "Equipo.h"
 #include "Partido.h"
 #include <string>
+#include <vector>
 using namespace std;
 
 class Grupo {
@@ -31,6 +32,9 @@ public:
     void mostrarGrupo();
     void setNombre(string nombre);
     void mostrarTabla();
+
+
+    vector<Equipo*> getEquiposOrdenados();
 };
 
 
